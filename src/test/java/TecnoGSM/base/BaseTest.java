@@ -11,14 +11,12 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected static final String BASE_URL = "https://tecnogsm.mitiendanube.com/";
 
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        options.addArguments("--disable-notifications");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }

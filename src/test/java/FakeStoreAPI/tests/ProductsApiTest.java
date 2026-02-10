@@ -2,6 +2,7 @@ package FakeStoreAPI.tests;
 
 import FakeStoreAPI.base.ApiBaseTest;
 import io.restassured.response.Response;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,7 +20,7 @@ public class ProductsApiTest extends ApiBaseTest {
                 .get("/products");
 
         Assert.assertEquals(response.getStatusCode(), 200);
-        List<?> products = response.jsonPath().getList("$");
+        List<WebElement> products = response.jsonPath().getList("$");
         Assert.assertFalse(products.isEmpty(), "Products list should not be empty");
 
         response.then().body(matchesJsonSchemaInClasspath("schemas/products-schema.json"));
@@ -47,7 +48,7 @@ public class ProductsApiTest extends ApiBaseTest {
                 .get("/products/category/electronics");
 
         Assert.assertEquals(response.getStatusCode(), 200);
-        List<?> products = response.jsonPath().getList("$");
+        List<WebElement> products = response.jsonPath().getList("$");
         Assert.assertFalse(products.isEmpty(), "Electronics list should not be empty");
 
         List<String> categories = response.jsonPath().getList("category");

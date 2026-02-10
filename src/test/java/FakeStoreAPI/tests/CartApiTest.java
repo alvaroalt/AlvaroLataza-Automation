@@ -2,6 +2,7 @@ package FakeStoreAPI.tests;
 
 import FakeStoreAPI.base.ApiBaseTest;
 import io.restassured.response.Response;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,7 +19,7 @@ public class CartApiTest extends ApiBaseTest {
                 .get("/carts");
 
         Assert.assertEquals(response.getStatusCode(), 200);
-        List<?> carts = response.jsonPath().getList("$");
+        List<WebElement> carts = response.jsonPath().getList("$");
         Assert.assertFalse(carts.isEmpty(), "Carts list should not be empty");
         System.out.println("PASSED: getAllCarts - returned " + carts.size() + " carts");
     }
@@ -32,7 +33,7 @@ public class CartApiTest extends ApiBaseTest {
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(response.jsonPath().getInt("id"), 1);
         Assert.assertNotNull(response.jsonPath().get("userId"), "userId should not be null");
-        List<?> products = response.jsonPath().getList("products");
+        List<WebElement> products = response.jsonPath().getList("products");
         Assert.assertFalse(products.isEmpty(), "Cart products should not be empty");
         System.out.println("PASSED: getCartById - cart has " + products.size() + " products");
     }
